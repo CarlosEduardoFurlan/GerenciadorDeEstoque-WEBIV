@@ -6,6 +6,13 @@
 .phpactor.json
 .phpunit.result.cache
 /.codex
+# Compartilhar somente as skills do Spec Kit, preservando estados locais de agentes.
+/.agents/*
+!/.agents/skills/
+/.agents/skills/*
+!/.agents/skills/speckit-*/
+/.agents/skills/speckit-*/*
+!/.agents/skills/speckit-*/SKILL.md
 /.cursor/
 /.idea
 /.nova
