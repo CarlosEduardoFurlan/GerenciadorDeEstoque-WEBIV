@@ -83,8 +83,8 @@ As Specs são a fonte detalhada de verdade dos requisitos das features, subordin
 material atualizado do professor e a esta Constituição. `Docs/CONTEXTO.md` DEVE servir
 como visão geral, histórico e registro do estado atual; NÃO DEVE substituir as Specs.
 `Docs/Sprints/README.md` DEVE funcionar apenas como roadmap; tarefas executáveis NÃO
-DEVEM ser duplicadas manualmente nele. Documentos em `Docs/Legado/` são históricos e
-NÃO DEVEM orientar novas implementações como requisitos vigentes.
+DEVEM ser duplicadas manualmente nele. Materiais históricos removidos do repositório NÃO DEVEM ser reintroduzidos como
+requisitos vigentes nem orientar novas implementações.
 
 ## Limites do escopo atual
 
@@ -138,4 +138,4 @@ e esclarecimentos sem mudança de significado. Toda revisão de Plan e de Pull R
 DEVE verificar conformidade; desvios DEVEM ser resolvidos antes da implementação ou
 integração. A documentação operacional está no README e no roadmap de Sprints.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-07
+**Version**: 1.0.1 | **Ratified**: 2026-11-07 | **Last Amended**: 2026-11-08
