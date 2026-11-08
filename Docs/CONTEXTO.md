@@ -1,6 +1,6 @@
 # Contexto do projeto — Sistema de Compras e Vendas
 
-Atualizado em 2026-11-07, na Sprint 0 — Adoção do Spec Kit e Rebaseline.
+Atualizado em 2026-11-07, na reorganização documental após a integração da adoção em `development`.
 
 ## 1. Visão geral e fontes de referência
 
@@ -81,7 +81,7 @@ As perguntas abaixo permanecem **em aberto**. Cada responsável deve levá-las �
 
 Uma decisão compartilhada deve ser refletida em todas as Specs afetadas antes de seus Plans, Tasks e implementação. Os números acima são referências de clarificação, não tarefas executáveis.
 
-## 5. O que mudou e o que virou legado
+## 5. Mudanças do escopo e organização atual
 
 | Tema | Definição ativa após o material atualizado |
 |---|---|
@@ -93,7 +93,7 @@ Uma decisão compartilhada deve ser refletida em todas as Specs afetadas antes d
 
 Orçamento de Compra, Orçamento de Venda, Movimentação de Estoque, Cliente, Venda, Venda Item, estoque mínimo/máximo, código de barras, campo `ativo` e demais decisões não confirmadas pela atualização foram retirados do modelo ativo. Regras antigas de status, confirmação, conversão de orçamentos e movimentações também não são herdadas automaticamente.
 
-O [DER anterior](Legado/DER-ANTERIOR.jpg) **NÃO representa mais o modelo oficial do projeto**. O [contexto anterior](Legado/CONTEXTO-ANTERIOR.md) e o [planejamento anterior](Legado/Sprints-Anteriores/README.md) foram preservados como história, sem autoridade sobre novas features. Veja o [índice do legado](Legado/README.md). Nenhum novo DER definitivo foi criado.
+Não existe DER definitivo neste momento, pois ainda há requisitos aguardando clarificação. O histórico documental antigo não faz mais parte da árvore do repositório. Os requisitos atuais estão descritos neste contexto e serão detalhados posteriormente nas Specs, sem reutilizar o modelo anterior como fonte oficial.
 
 ## 6. Desenvolvimento orientado a Specs
 
@@ -110,7 +110,9 @@ $speckit-specify → $speckit-clarify → $speckit-plan → $speckit-checklist
 → $speckit-tasks → $speckit-analyze → $speckit-implement → $speckit-converge
 ```
 
-Spec, Plan e Tasks devem estar consistentes antes da implementação. Os artefatos detalhados ficarão em `specs/<numero>-<tema>/`; o [roadmap](Sprints/README.md) explica os arquivos e a divisão entre os quatro integrantes. Não duplicar manualmente as Tasks em `Docs/Sprints/`.
+Spec, Plan e Tasks devem estar consistentes antes da implementação. Os artefatos detalhados ficarão em `specs/<numero>-<tema>/`; as tarefas executáveis serão geradas em `specs/<numero>-<tema>/tasks.md`. O [roadmap](Sprints/README.md) e os quatro arquivos por integrante em `Docs/Sprints/` registram escopos conhecidos, dependências, clarificações e o processo futuro. Não duplicar manualmente as Tasks em `Docs/Sprints/`.
+
+`development` é a branch de integração; `main` é a branch de versões estáveis/consolidadas. Cada feature nasce da `development` atualizada, usa sua branch `feature/XXX-nome` e gera PR para `development`. Somente versões consolidadas seguem de `development` para `main`. Os números 001–008 estão reservados; cada integrante informará explicitamente `SPECIFY_FEATURE_DIRECTORY=specs/XXX-nome` ao criar sua Spec.
 
 ## 7. Estado atual e próximo passo
 
@@ -118,6 +120,6 @@ A inspeção inicial encontrou somente o esqueleto Laravel: Model `User`, Contro
 
 Esta Sprint 0 prepara Spec Kit, Constitution, documentação e roadmap. Na auditoria final, Laravel Boost foi removido por não integrar a stack nem ser necessário ao Spec Kit/Codex. `composer.json` e `composer.lock` foram restaurados ao estado anterior, sem alteração de outras dependências. As instruções antigas que exigiam Boost foram substituídas. O código da aplicação e suas migrations permanecem preservados.
 
-**Nenhuma Spec 001–008 foi criada e nenhuma funcionalidade foi implementada nesta tarefa.** Não existe ainda diretório de feature em `specs/`. O próximo passo, após revisão da Sprint 0, é cada integrante iniciar sua própria Spec da Sprint 1: 001-categorias, 002-produtos, 003-fornecedores e 004-formas-pagamento. A criação geral de migrations a partir do DER antigo deixou de ser a próxima etapa.
+**A adoção do Spec Kit foi integrada em `development`.** Esta reorganização altera somente documentação, remove o material anterior e cria os quatro guias de responsabilidade por integrante. Nenhuma Spec 001–008 foi criada e nenhuma funcionalidade foi implementada; o diretório `specs/` ainda não existe. O próximo passo, após revisão documental, é cada integrante iniciar sua própria Spec da Sprint 1: 001-categorias, 002-produtos, 003-fornecedores e 004-formas-pagamento, seguindo as dependências e regras do roadmap. Não criar Specs 009+ enquanto vendas aguarda os requisitos atualizados.
 
 A validação do ambiente PostgreSQL e a instalação em outro computador continuam sendo verificações de cada integrante; não devem ser consideradas concluídas apenas porque o processo documental foi preparado.
