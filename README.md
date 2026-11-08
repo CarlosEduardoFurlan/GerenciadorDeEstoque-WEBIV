@@ -23,14 +23,12 @@ A documentação de referência do projeto está em:
 - [Constitution](.specify/memory/constitution.md): princípios e governança.
 - [Contexto](Docs/CONTEXTO.md): visão geral, estado atual e pontos de clarificação.
 - [Roadmap de Sprints](Docs/Sprints/README.md): temas, dependências e responsáveis.
-- [Relatório da adoção](Docs/ADOCAO-SPEC-KIT.md): verificações e inventário exato desta rebaseline.
+- [Registro da adoção](Docs/ADOCAO-SPEC-KIT.md): estado do processo e reorganização documental.
 - `specs/`: futuras especificações detalhadas das features, fonte detalhada de verdade.
-- [Legado](Docs/Legado/README.md): contexto e planejamento anteriores preservados.
 
-Os requisitos atualizados do professor têm prioridade. O
-[DER-ANTERIOR.jpg](Docs/Legado/DER-ANTERIOR.jpg) **NÃO representa mais o modelo oficial
-do projeto**. Não há novo DER definitivo enquanto as ambiguidades não forem resolvidas.
-Nesta Sprint 0, nenhuma feature nem Spec 001–008 foi criada.
+Os requisitos atualizados do professor têm prioridade. Não existe DER definitivo neste
+momento: ainda há requisitos aguardando clarificação. O material de planejamento antigo
+foi removido da árvore do projeto. As Specs 001–008 continuam reservadas para criação futura.
 
 ## Requisitos
 
@@ -235,35 +233,28 @@ Laravel/PostgreSQL/npm acima continuam válidas e não há implementação de ne
 
 ## Fluxo de Git
 
-A branch `main` representa a versão estável do projeto.
-
-As tarefas devem ser desenvolvidas em branches próprias, por exemplo:
+A branch `development` recebe a integração das features. A `main` fica reservada
+a versões estáveis e consolidadas:
 
 ```text
-001-categorias
-002-produtos
-fix/validacao-produto
+feature/spec → development → main
 ```
 
-Antes de iniciar uma nova tarefa:
+Cada integrante deve partir da `development` atualizada e criar uma branch por Spec:
 
 ```bash
-git checkout main
-git pull --ff-only origin main
+git checkout development
+git pull origin development
+git checkout -b feature/001-categorias
 ```
 
-Para features, iniciar `$speckit-specify` no Codex e conferir a branch e o número
-reservado gerados, coordenando a numeração com o grupo. Para manutenção documental,
-criar uma branch como `chore/nome-da-tarefa`. O roadmap explica as dependências.
+Os outros nomes reservados para a Sprint 1 são `feature/002-produtos`,
+`feature/003-fornecedores` e `feature/004-formas-pagamento`. No Codex, informar o
+`SPECIFY_FEATURE_DIRECTORY` correspondente ao executar `$speckit-specify`, sem depender
+da numeração automática. Esse processo será executado futuramente, não nesta reorganização.
 
-Ao finalizar:
-
-```bash
-git add .
-git commit -m "feat: descricao da tarefa"
-git push -u origin nome-da-branch
-```
-
-Depois, abra um Pull Request para revisão antes do merge.
-Os comandos de publicação acima são orientações para o integrante após revisão.
-Nesta tarefa de adoção não foi feito push nem merge na `main`.
+Cada feature deve gerar um PR independente para `development`, nunca diretamente para
+`main`. Somente versões consolidadas seguem de `development` para `main`. Para atualizar
+uma feature com dependências já integradas, o grupo recomenda merge de `development`
+para a feature, por simplicidade acadêmica. O [roadmap](Docs/Sprints/README.md) e os
+quatro arquivos por integrante detalham o fluxo e a prevenção de conflitos.

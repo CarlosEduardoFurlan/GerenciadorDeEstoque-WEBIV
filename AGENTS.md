@@ -9,8 +9,11 @@
 - Seguir Spec Kit com integração `codex`: specify → clarify → plan → checklist → tasks
   → analyze → implement → converge. Spec, Plan e Tasks devem estar consistentes antes
   da implementação; os artefatos detalhados ficarão em `specs/`.
-- `Docs/Legado/` é somente histórico. Não usar o DER ou os checklists antigos como
-  fonte oficial. Não presumir respostas às dez ambiguidades registradas no contexto.
+- Não existe DER definitivo. Não usar o modelo ou os checklists anteriores como fonte
+  oficial. Não presumir respostas às dez ambiguidades registradas no contexto.
+- Cada feature parte da `development` atualizada e gera PR para `development`;
+  `main` recebe somente versões estáveis/consolidadas. Seguir os números reservados e
+  informar explicitamente `SPECIFY_FEATURE_DIRECTORY` conforme o guia do integrante.
 - A Sprint 0 de adoção prepara somente processo e documentação: não criar Specs 001–008
   nem código de negócio nessa tarefa. A divisão futura dos quatro integrantes está no roadmap.
 

@@ -1,161 +1,22 @@
-# Roadmap de Sprints e Specs
+# Roadmap geral de Specs e Sprints
 
-Este roadmap organiza o **Sistema de Compras e Vendas** por temas, dependências e
-responsáveis. As tarefas executáveis ficarão exclusivamente em `specs/<numero>-<tema>/tasks.md`.
-Não duplicar manualmente tarefas nem manter checklists de implementação em `Docs/Sprints/`.
+O **Sistema de Compras e Vendas** utiliza Spec-Driven Development com GitHub Spec Kit
+e integração `codex`. A adoção já foi integrada em `development`; esta preparação é
+somente documental. As Specs 001–008 estão reservadas e ainda não foram criadas.
 
-As fontes de referência são os requisitos atualizados do professor, a
-[Constitution](../../.specify/memory/constitution.md), as futuras Specs e o
-[contexto atual](../CONTEXTO.md), que reúne a visão geral e as ambiguidades.
-O [planejamento anterior](../Legado/Sprints-Anteriores/README.md) é apenas histórico.
+As fontes são os requisitos atualizados do professor, a
+[Constitution](../../.specify/memory/constitution.md) e o [contexto](../CONTEXTO.md).
+Não existe DER definitivo enquanto houver requisitos aguardando clarificação.
+Os arquivos por integrante descrevem responsabilidades, escopo conhecido e dependências;
+não são Specs nem listas de tarefas executáveis.
 
-Os números 001–008 abaixo são **reservas de planejamento**: nenhuma dessas Specs deve
-ser criada nesta Sprint 0. Cada integrante criará sua Spec posteriormente. Os nomes
-“Integrante 1” a “Integrante 4” preservam a divisão fornecida; o grupo pode associá-los
-aos nomes reais sem alterar a responsabilidade prevista.
+## Modelo de desenvolvimento
 
-## Sprint 0 — Adoção do Spec Kit e Rebaseline
-
-**Responsável:** grupo inteiro.
-
-Objetivos: instalar e inicializar o Spec Kit no repositório existente com integração
-`codex`; criar a Constitution; atualizar contexto e README; retirar o DER antigo como
-modelo ativo preservando o histórico; criar este roadmap. Não implementar features,
-não criar Specs 001–008 e não gerar um novo DER definitivo nesta sprint.
-
-A revisão de saída deve confirmar que os arquivos compartilháveis do Spec Kit estão
-disponíveis, a integração funciona, os dez pontos de clarificação estão registrados e
-nenhum código de negócio foi criado. A validação do ambiente local de cada integrante
-continua conforme o README.
-
-## Sprint 1 — Cadastros Fundamentais
-
-| Integrante | Spec | Tema |
-|---|---|---|
-| Integrante 1 | 001 | Categorias |
-| Integrante 2 | 002 | Produtos |
-| Integrante 3 | 003 | Fornecedores |
-| Integrante 4 | 004 | Formas de Pagamento |
-
-### 001-categorias
-
-**Integrante 1.** Escopo: descrição, margem de lucro, CRUD, validações e participação
-da margem na formação do preço de venda. Clarificar com as Specs 002/006 se a alteração
-da margem exige recálculo dos produtos existentes.
-
-### 002-produtos
-
-**Integrante 2.** Escopo: descrição, categoria, valor de compra, valor de venda,
-quantidade em estoque e regra do valor de venda conforme a margem da categoria.
-**Dependência conceitual:** Spec 001. Clarificar os gatilhos de recálculo de preço e
-coordenar a decisão com 001/006. Não incorporar campos antigos sem requisito atualizado.
-
-### 003-fornecedores
-
-**Integrante 3.** Escopo: nome, documento, email, endereço, telefone, CRUD e validações.
-Não assumir CNPJ como único tipo de documento.
-
-### 004-formas-pagamento
-
-**Integrante 4.** Escopo: descrição, número de parcelas, itens, porcentagem e `dia`
-inteiro. Clarify obrigatório: significado de `dia`, relação entre `numero_parcelas` e
-quantidade de itens, e soma das porcentagens. O relacionamento técnico dos itens com
-a forma de pagamento pertence ao Plan/Data Model, depois das clarificações.
-
-## Sprint 2 — Fluxo de Compra
-
-| Integrante | Spec | Tema |
-|---|---|---|
-| Integrante 1 | 005 | Compras |
-| Integrante 2 | 006 | Atualização de Custos e Preço de Venda |
-| Integrante 3 | 007 | Contas a Pagar |
-| Integrante 4 | 008 | Entrada no Estoque |
-
-### 005-compras
-
-**Integrante 1.** Escopo: documento, fornecedor, data, forma de pagamento, valor,
-itens, produto, quantidade, valor unitário, valor total e cálculo de subtotal/total.
-Planejar sobre os cadastros 002, 003 e 004. Coordenar com 006, 007 e 008 os efeitos da
-compra, sem presumir fluxo de status, finalização ou automações do modelo anterior.
-
-### 006-atualizacao-custos
-
-**Integrante 2.** Escopo: atualização de `produto.valor_compra`, média aritmética
-definida pelo professor e atualização de `valor_venda` conforme a margem da categoria.
-**Clarify obrigatório:** fórmula exata da média e conjunto de valores participantes.
-Clarificar também os gatilhos de recálculo de venda, em conjunto com 001/002/005.
-Nenhuma fórmula deve ser assumida antes dessa resposta.
-
-### 007-contas-pagar
-
-**Integrante 3.** Escopo: documento, fornecedor, compra, vencimento, valor e data de
-pagamento. Clarificar geração automática, relação com forma de pagamento e cálculo
-dos vencimentos, incluindo se `data_vencimento` corresponde a `compra.data + dia`.
-Coordenar as decisões com 004/005 antes do Plan e da implementação.
-
-### 008-entrada-estoque
-
-**Integrante 4.** Escopo provável: atualização de `quantidade_estoque` após compra.
-**Regra condicionada a Clarify antes da implementação:** a folha nova mostra estoque
-no produto, mas não descreve diretamente se a compra altera o saldo automaticamente
-nem em qual momento. Coordenar com 002/005. Esta reserva de roadmap não confirma a regra
-nem autoriza criar uma entidade de Movimentação de Estoque.
-
-As dependências acima organizam o trabalho; os Plans definirão a integração técnica.
-Não implementar efeitos compartilhados de compra, custo, estoque e financeiro de forma
-independente sem conciliar as decisões e a necessidade de transações.
-
-## Sprint 3 — Vendas
-
-**Status: BLOQUEADA — AGUARDANDO NOVOS REQUISITOS DO PROFESSOR.**
-
-A parte de vendas está **AGUARDANDO REQUISITOS ATUALIZADOS DO PROFESSOR**.
-Não criar Specs 009+ ainda e não reutilizar Cliente, Venda, Venda Item ou orçamentos do
-DER antigo como modelo ativo. Quando o material chegar, atualizar primeiro requisitos
-e documentação, depois Specs, Plans, Tasks e código.
-
-## Sprint 4 — Convergência e Revisão
-
-Cada integrante revisará suas próprias Specs:
-
-| Responsável | Specs |
-|---|---|
-| Integrante 1 | 001 e 005 |
-| Integrante 2 | 002 e 006 |
-| Integrante 3 | 003 e 007 |
-| Integrante 4 | 004 e 008 |
-
-Executar para cada feature, no seu contexto:
+Para cada feature futura, executar no chat do Codex uma etapa por vez e revisar o resultado:
 
 ```text
-$speckit-converge
-```
-
-Se houver novas tarefas, revisá-las e repetir:
-
-```text
-$speckit-implement
-$speckit-converge
-```
-
-Continuar até obter convergência, com evidências de validação dos critérios da Spec.
-A revisão de compras pode ocorrer enquanto vendas aguarda requisitos; isso não permite
-declarar concluída a parte de vendas.
-
-**Revisão cruzada:** Integrante 1 revisa Integrante 2; Integrante 2 revisa Integrante 3;
-Integrante 3 revisa Integrante 4; Integrante 4 revisa Integrante 1.
-
-## Como cada integrante desenvolverá sua Spec
-
-Após a revisão da Sprint 0, partir da `main` atualizada em um checkout próprio e abrir
-o Codex na raiz do repositório. Informar o número reservado e o tema ao criar a feature;
-conferir o número e a branch gerados antes de continuar. O CLI está configurado para
-numeração sequencial: o grupo deve coordenar a criação para evitar que checkouts ainda
-sem as Specs dos colegas reservem o mesmo número. Não gerar as oito Specs nesta tarefa.
-
-Executar **no chat do Codex**, uma skill por vez, lendo e revisando o resultado:
-
-```text
+Requisito do professor
+        ↓
 $speckit-specify
         ↓
 $speckit-clarify
@@ -173,22 +34,233 @@ $speckit-implement
 $speckit-converge
 ```
 
-`clarify` registra as decisões sobre dúvidas; `checklist` verifica a qualidade dos
-requisitos; `analyze` verifica consistência entre os artefatos; `converge` compara os
-artefatos com a implementação e registra trabalho restante. Spec, Plan e Tasks devem
-estar consistentes antes de iniciar `implement`. Ambiguidades que afetam a feature
-devem ser resolvidas com o professor ou em Clarify, sem respostas inventadas.
-
-| Artefato futuro em `specs/<numero>-<tema>/` | Finalidade |
+| Artefato em `specs/<numero>-<feature>/` | Finalidade |
 |---|---|
-| `spec.md` | WHAT e WHY: o que entregar, por quê, user stories quando aplicáveis, critérios de aceitação, cenários independentes, casos de erro e conclusão mensurável |
-| `plan.md` | HOW técnico: abordagem Laravel, dependências, conformidade com a Constitution e estratégia de validação |
-| `tasks.md` | Tarefas executáveis e acompanhamento da implementação, sem duplicação em `Docs/Sprints/` |
+| `spec.md` | WHAT e WHY: o que entregar e por quê; critérios de aceitação, histórias quando aplicáveis e casos de erro |
+| `plan.md` | HOW técnico: abordagem, dependências e validação |
+| `tasks.md` | Tarefas executáveis da feature |
 | `checklists/` | Qualidade dos requisitos: clareza, completude e consistência |
-| `data-model.md` | Modelo de dados da feature, relacionamentos e constraints justificados |
-| `quickstart.md` | Como validar a feature e reproduzir seus cenários |
-| `research.md` | Decisões que precisaram de pesquisa e suas justificativas |
+| `data-model.md` | Modelo de dados da feature |
+| `research.md` | Decisões que exigiram pesquisa e suas justificativas |
+| `quickstart.md` | Cenários de validação reproduzíveis |
 
-Em mudanças de requisito, atualizar na ordem **Requisito do professor → Spec → Plan →
-Tasks → Implementação** e sincronizar as Specs afetadas. Ao concluir a feature, registrar
-as verificações, revisar o diff e abrir Pull Request para revisão cruzada antes do merge.
+**Não duplicar tarefas de `tasks.md` em `Docs/Sprints/`.** Esses artefatos serão gerados
+posteriormente pelo Spec Kit; nenhum diretório `specs/` será criado nesta reorganização.
+
+## Divisão por integrante
+
+| Integrante | Sprint 1 | Sprint 2 |
+|---|---|---|
+| [Integrante 1](INTEGRANTE-1-SPECS-001-005.md) | Spec 001 — Categorias | Spec 005 — Compras |
+| [Integrante 2](INTEGRANTE-2-SPECS-002-006.md) | Spec 002 — Produtos | Spec 006 — Atualização de Custos e Preço de Venda |
+| [Integrante 3](INTEGRANTE-3-SPECS-003-007.md) | Spec 003 — Fornecedores | Spec 007 — Contas a Pagar |
+| [Integrante 4](INTEGRANTE-4-SPECS-004-008.md) | Spec 004 — Formas de Pagamento | Spec 008 — Entrada no Estoque |
+
+Os guias registram os diretórios e branches reservados, o escopo conhecido, as
+clarificações e o fluxo que cada responsável executará futuramente.
+
+## Sprints
+
+### Sprint 0 — Adoção do Spec Kit e Rebaseline
+
+Adoção concluída e integrada em `development`, com Constitution e infraestrutura
+compartilhável. A reorganização atual prepara os guias por integrante sem implementar
+features, alterar requisitos ou criar um DER definitivo.
+
+### Sprint 1 — Cadastros Fundamentais
+
+Specs 001–004: Categorias, Produtos, Fornecedores e Formas de Pagamento. O trabalho de
+especificação pode ocorrer em paralelo; implementação e integração respeitam as dependências.
+A relação entre categoria, custo e preço de venda deve ser coordenada entre 001, 002 e 006.
+
+### Sprint 2 — Fluxo de Compra
+
+Specs 005–008: Compras, Atualização de Custos e Preço de Venda, Contas a Pagar e Entrada
+no Estoque. A implementação depende da base necessária integrada em `development`.
+A média, os gatilhos de preço/estoque, o parcelamento e a geração de contas a pagar
+continuam sujeitos às clarificações do contexto e dos guias. Não presumir automações.
+
+### Sprint 3 — Vendas
+
+**BLOQUEADA — AGUARDANDO REQUISITOS ATUALIZADOS DE VENDA DO PROFESSOR.**
+
+Não criar Specs 009+. O título do projeto não autoriza inventar o novo modelo de vendas.
+
+### Sprint 4 — Convergência e Revisão
+
+Cada integrante revisará suas duas Specs: Integrante 1, 001/005; Integrante 2, 002/006;
+Integrante 3, 003/007; Integrante 4, 004/008. Usar `$speckit-converge` e, havendo lacunas,
+revisar as tarefas geradas e repetir `$speckit-implement` → `$speckit-converge`.
+
+Revisão cruzada: Integrante 1 revisa Integrante 2; Integrante 2 revisa Integrante 3;
+Integrante 3 revisa Integrante 4; Integrante 4 revisa Integrante 1. A revisão das Specs
+já disponíveis não permite declarar concluída a parte de vendas ainda bloqueada.
+
+## Fluxo Git oficial
+
+```text
+feature/spec → development → main
+```
+
+`development` é a branch de integração. `main` recebe somente versões estáveis e
+consolidadas, por PR de `development`. Features nunca partem da `main` nem abrem PR
+diretamente para ela. Os comandos deste documento são instruções futuras; nenhum
+commit, push ou merge será executado nesta reorganização.
+
+## Regras de trabalho em paralelo e prevenção de conflitos
+
+### Regra 1 — Uma branch por Spec
+
+Nunca desenvolver duas Specs na mesma branch. Cada branch nasce da `development`:
+
+```bash
+git checkout development
+git pull origin development
+git checkout -b feature/001-categorias
+```
+
+Exemplos: `feature/001-categorias`, `feature/002-produtos`, `feature/003-fornecedores`
+e `feature/004-formas-pagamento`. Conferir a branch atual antes de iniciar o Codex.
+
+### Regra 2 — Números reservados
+
+```text
+001 Categorias
+002 Produtos
+003 Fornecedores
+004 Formas de Pagamento
+005 Compras
+006 Atualização de Custos
+007 Contas a Pagar
+008 Entrada no Estoque
+```
+
+Não depender da numeração automática do Spec Kit. Ao executar `$speckit-specify`,
+informar explicitamente no pedido ao Codex o diretório reservado:
+
+```text
+$speckit-specify
+SPECIFY_FEATURE_DIRECTORY=specs/XXX-nome
+```
+
+Substituir `XXX-nome` pelo nome exato do guia do integrante e descrever a feature.
+A opção explícita impede que clones diferentes escolham automaticamente o mesmo `001`.
+Branch e diretório da Spec são independentes: `feature/001-categorias` usa
+`specs/001-categorias`, sem incluir `feature/` no caminho. Conferir o diretório resolvido.
+
+### Regra 3 — Não editar Spec de outro integrante
+
+Cada integrante é responsável somente pelas próprias Specs. Se uma decisão afetar outra
+Spec, comunicar o responsável, registrar a dependência e alinhar a decisão. Não editar
+silenciosamente os artefatos de outra pessoa. Requisitos alterados devem percorrer
+Requisito do professor → Spec → Plan → Tasks → Implementação.
+
+### Regra 4 — Arquivos compartilhados
+
+Evitar alterações simultâneas desnecessárias em:
+
+```text
+routes/web.php
+database/seeders/DatabaseSeeder.php
+README.md
+Docs/CONTEXTO.md
+Docs/Sprints/README.md
+```
+
+Mudanças globais nesses arquivos devem ser pequenas e coordenadas. As Tasks da feature
+devem identificar os arquivos afetados, sem serem copiadas para estes guias.
+
+### Regra 5 — Dependências não impedem especificação
+
+A Spec 002 depende conceitualmente da 001, mas o Integrante 2 pode executar specify,
+clarify, plan, checklist, tasks e analyze em paralelo, alinhando as decisões com o
+Integrante 1. Antes de implementar código dependente de Categoria ou concluir sua
+integração, aguardar a 001 em `development` e sincronizar a branch:
+
+```bash
+git checkout development
+git pull origin development
+git checkout feature/002-produtos
+git merge development
+```
+
+Para este projeto, recomenda-se **merge de `development` para a feature**, por
+simplicidade acadêmica. Rebase somente se o grupo adotar expressamente essa prática;
+não alternar aleatoriamente entre estratégias. Resolver conflitos e verificar o resultado
+antes de prosseguir, sem sobrescrever o trabalho de outro integrante.
+
+### Regra 6 — Ordem recomendada de integração da Sprint 1
+
+```text
+001-categorias
+      ↓
+003-fornecedores
+      ↓
+004-formas-pagamento
+      ↓
+002-produtos
+```
+
+Categoria é dependência direta de Produto. Fornecedor e Forma de Pagamento são
+relativamente independentes; Produto deve ser integrado depois de Categoria. Essa é
+uma ordem de integração recomendada e não impede trabalho paralelo de Spec e Plan.
+
+### Regra 7 — Sprint 2 só após base estável
+
+As Specs 005–008 podem ser estudadas antecipadamente. Sua implementação só começa após
+as dependências necessárias da Sprint 1 estarem integradas em `development`, respeitando
+também as dependências internas da Sprint 2 descritas nos guias:
+
+```text
+Sprint 1 → development estável → Sprint 2
+```
+
+### Regra 8 — Spec Kit feature ativa é local
+
+`.specify/feature.json` é estado local ignorado pelo Git; não serve para coordenar o
+trabalho entre integrantes. Cada pessoa deve usar seu próprio checkout/branch e garantir
+que o Spec Kit aponta para sua própria feature. Conferir `SPECIFY_FEATURE_DIRECTORY`
+e o contexto ativo antes de executar cada etapa, sobretudo ao alternar entre as duas Specs.
+Não versionar esse estado nem compartilhá-lo para selecionar features dos colegas.
+
+### Regra 9 — Antes de implementar
+
+Não executar `$speckit-implement` enquanto houver clarificações críticas abertas,
+checklist inadequado, inconsistências críticas apontadas por `$speckit-analyze` ou
+dependências necessárias indisponíveis. Spec, Plan e Tasks devem estar consistentes.
+
+### Regra 10 — PR
+
+Cada feature deve gerar um PR independente:
+
+```text
+feature/XXX-nome → development
+```
+
+Nunca abrir PR de feature diretamente para `main`. Somente versões consolidadas seguem
+por PR `development → main`, após revisão. Não integrar duas Specs no mesmo PR de feature.
+
+### Regra 11 — Testes
+
+Antes do PR, executar:
+
+```bash
+php artisan test
+```
+
+Executar também os cenários de `specs/XXX-feature/quickstart.md`, substituindo o caminho
+pelo diretório real da feature. Registrar os resultados para revisão, sem presumir sucesso.
+
+### Regra 12 — Convergência
+
+Antes de considerar a feature concluída, executar `$speckit-converge`. Se houver lacunas,
+revisar o trabalho restante e repetir:
+
+```text
+$speckit-implement
+$speckit-converge
+```
+
+Continuar até o resultado esperado **`Converged`**, com os critérios de aceitação
+validados. Os comandos e cenários de negócio acima serão executados nas futuras features;
+esta reorganização não cria Specs nem implementa funcionalidades.
