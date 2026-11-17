@@ -1,114 +1,52 @@
-# Sistema de Controle de Estoque
+# Sistema de Compras e Vendas
 
 Trabalho acadêmico da disciplina **Construção de Páginas Web IV** do curso de **Tecnologia em Sistemas para Internet - IFMS**.
 
 ## Tecnologias
-
 - PHP 8.3+
 - Laravel 13
-- PostgreSQL
-- Laravel Blade
+- **SQLite**
+- Blade
 - Bootstrap 5
 - Vite
-- JavaScript apenas quando necessário
+- Laravel Breeze
 
-## Documentação do projeto
-
-A documentação de referência do projeto está em:
-
-- `Docs/CONTEXTO.md`
-- `Docs/DER.jpg`
-
-O DER documentado é o modelo oficial do projeto.
-
-## Requisitos
-
-Antes de executar o projeto, instale:
-
-- PHP 8.3 ou superior
-- Composer
-- PostgreSQL
-- Node.js
-- npm
+## Documentação
+- [Constitution](.specify/memory/constitution.md)
+- [Contexto](Docs/CONTEXTO.md)
+- [Roadmap](Docs/Sprints/README.md)
+- [Guia dos integrantes](Docs/GUIA-INTEGRANTES-SPECS.md)
 
 ## Instalação
-
-Clone o repositório:
 
 ```bash
 git clone https://github.com/CarlosEduardoFurlan/GerenciadorDeEstoque-WEBIV.git
 cd GerenciadorDeEstoque-WEBIV
-```
-
-Instale as dependências PHP:
-
-```bash
 composer install
 ```
 
-Crie o arquivo de ambiente a partir do exemplo.
-
-Linux/macOS:
-
-```bash
-cp .env.example .env
-```
-
-Windows (Prompt de Comando):
-
-```cmd
-copy .env.example .env
-```
-
-Gere a chave da aplicação:
+Crie o `.env` a partir de `.env.example` e gere a chave:
 
 ```bash
 php artisan key:generate
 ```
 
-## Banco de dados
+## SQLite
 
-Crie no PostgreSQL um banco vazio chamado:
-
-```text
-controle_estoque
-```
-
-O `.env.example` já está preparado para PostgreSQL. No seu arquivo `.env`, ajuste apenas as credenciais locais quando necessário:
-
-```env
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_DATABASE=controle_estoque
-DB_USERNAME=postgres
-DB_PASSWORD=SUA_SENHA_LOCAL
-```
-
-As tabelas do sistema devem ser criadas por migrations do Laravel, não manualmente pelo pgAdmin.
-
-Limpe o cache de configuração e execute as migrations:
+Crie o arquivo local se necessário:
 
 ```bash
+php -r "file_exists('database/database.sqlite') || touch('database/database.sqlite');"
 php artisan config:clear
 php artisan migrate
 ```
 
 ## Frontend
 
-Instale as dependências:
-
 ```bash
 npm install
-```
-
-Durante o desenvolvimento, execute:
-
-```bash
 npm run dev
 ```
-
-## Executar a aplicação
 
 Em outro terminal:
 
@@ -116,52 +54,33 @@ Em outro terminal:
 php artisan serve
 ```
 
-A aplicação ficará disponível em:
-
-```text
-http://127.0.0.1:8000
-```
-
-## Verificação da Sprint 0
-
-Antes de iniciar o desenvolvimento das funcionalidades, cada integrante deve conseguir:
-
-1. clonar o repositório;
-2. executar `composer install`;
-3. criar e configurar o próprio `.env`;
-4. conectar ao PostgreSQL local;
-5. executar `php artisan migrate` sem erros;
-6. executar `npm install` e `npm run dev`;
-7. executar `php artisan serve`;
-8. abrir a aplicação em `http://127.0.0.1:8000`;
-9. criar uma branch própria e realizar push.
-
-## Fluxo de Git
-
-A branch `main` representa a versão estável do projeto.
-
-As tarefas devem ser desenvolvidas em branches próprias, por exemplo:
-
-```text
-feature/crud-produtos
-feature/orcamento-compra
-fix/validacao-produto
-```
-
-Antes de iniciar uma nova tarefa:
+## Spec Kit
 
 ```bash
-git checkout main
-git pull origin main
-git checkout -b feature/nome-da-tarefa
+uv tool install specify-cli==1.3.2
+specify integration status
 ```
 
-Ao finalizar:
+Fluxo:
 
-```bash
-git add .
-git commit -m "feat: descricao da tarefa"
-git push -u origin feature/nome-da-tarefa
+```text
+$speckit-specify → $speckit-clarify → $speckit-plan → $speckit-checklist
+→ $speckit-tasks → $speckit-analyze → $speckit-implement → $speckit-converge
 ```
 
-Depois, abra um Pull Request para revisão antes do merge.
+## Git
+
+```text
+feature/spec → development → main
+```
+
+## Requisitos transversais
+
+- validação de formulários;
+- paginação 10;
+- um cadastro com upload;
+- autenticação Breeze;
+- e-mail por venda;
+- relatório de contas a receber.
+
+Consulte o roadmap para a divisão atualizada das Specs 001–012.

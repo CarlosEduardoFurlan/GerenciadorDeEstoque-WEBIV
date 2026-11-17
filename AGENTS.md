@@ -1,47 +1,34 @@
-<laravel-boost-guidelines>
-# Laravel Application
+# Instruções do projeto
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+## Fontes e processo
 
-## Prerequisites
+- Ler `.specify/memory/constitution.md`, `Docs/CONTEXTO.md`, `Docs/Sprints/README.md` e `Docs/GUIA-INTEGRANTES-SPECS.md`.
+- Os requisitos mais recentes do professor têm prioridade e agora incluem **DE COMPRA**, **DE VENDA** e requisitos transversais.
+- Seguir Spec Kit: specify → clarify → plan → checklist → tasks → analyze → implement → converge.
+- Cada feature parte de `development` e gera PR para `development`.
 
-Verify that PHP and Composer are available:
+## Stack e convenções
 
-```sh
-php -v
-composer -V
-```
+- PHP 8.3+, Laravel 13, **SQLite**, Blade, Bootstrap 5 e Vite.
+- Autenticação obrigatória com Laravel Breeze.
+- Seguir MVC, Eloquent, migrations, Form Requests e Services quando necessário.
+- Todos os formulários devem ser validados.
+- Listagens devem paginar 10 registros.
+- Pelo menos um cadastro deve possuir upload de arquivo; o roadmap aloca esse requisito à Spec 002.
+- Não instalar Laravel Boost.
 
-If either command is unavailable, detect the user's operating system and install the prerequisites with the appropriate command:
+## Compra e venda
 
-macOS:
+- Alterar margem de categoria atualiza preço de venda dos produtos da categoria.
+- Compra atualiza valor de compra e estoque e gera contas a pagar conforme parcelamento.
+- Contas a pagar possuem situação e baixa.
+- Venda atualiza estoque e gera contas a receber conforme parcelamento.
+- Cada venda envia e-mail ao cliente com os dados da venda.
+- Contas a receber possuem baixa e relatório por período com totais de não pagos vencidos, não pagos a vencer e pagos.
 
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
-```
+## Verificação e Git
 
-Windows PowerShell:
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
-```
-
-Linux:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
-```
-
-After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
-
-## Agent Setup
-
-Install Laravel Boost from the application root before making application changes:
-
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
+- Consultar `git status` antes de editar.
+- Executar testes aplicáveis antes do PR.
+- Não versionar `.env`, credenciais ou `.specify/feature.json`.
+- Features entram em `development` por PR; `main` recebe somente versões consolidadas.

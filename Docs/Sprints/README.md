@@ -1,109 +1,83 @@
-# Planejamento das Sprints
+# Roadmap geral de Specs e Sprints
 
-Este diretório organiza o desenvolvimento do **Sistema de Controle de Estoque** por integrante e por sprint.
+## Divisão atualizada
 
-O planejamento geral do projeto continua definido em [../CONTEXTO.md](../CONTEXTO.md) e o modelo de dados oficial está em [../DER.jpg](../DER.jpg).
+| Integrante | Sprint 1 | Sprint 2 | Sprint 3 |
+|---|---|---|---|
+| Integrante 1 | 009 Autenticação + 001 Categorias | 005 Compras | revisão |
+| Integrante 2 | 002 Produtos | 006 Atualização do Produto após Compra | 010 Clientes |
+| Integrante 3 | 003 Fornecedores | 007 Contas a Pagar | 011 Vendas e E-mail |
+| Integrante 4 | 004 Formas de Pagamento | 008 Entrada no Estoque | 012 Contas a Receber e Relatório |
 
-## Forma de trabalho
+Guias:
+- [Integrante 1](INTEGRANTE-1-SPECS-001-005-009.md)
+- [Integrante 2](INTEGRANTE-2-SPECS-002-006-010.md)
+- [Integrante 3](INTEGRANTE-3-SPECS-003-007-011.md)
+- [Integrante 4](INTEGRANTE-4-SPECS-004-008-012.md)
 
-Não serão utilizadas GitHub Issues para acompanhar as tarefas.
+## Sprint 1 — Fundação e cadastros
 
-Cada integrante possui um arquivo Markdown próprio com as duas sprints sob sua responsabilidade. O próprio arquivo funciona como checklist da execução.
+- 009 Autenticação com Breeze — Integrante 1;
+- 001 Categorias — Integrante 1;
+- 002 Produtos — Integrante 2;
+- 003 Fornecedores — Integrante 3;
+- 004 Formas de Pagamento — Integrante 4.
 
-Ao concluir uma tarefa, altere:
+009 deve entrar cedo porque autenticação é requisito global. Todas as listagens usam paginação 10 e formulários usam validação. A Spec 002 atenderá o requisito mínimo de upload.
 
-```text
-- [ ] Tarefa pendente
-```
+## Sprint 2 — Compra
 
-para:
+- 005 Compras — Integrante 1;
+- 006 Atualização do Produto após Compra — Integrante 2;
+- 007 Contas a Pagar — Integrante 3;
+- 008 Entrada no Estoque — Integrante 4.
 
-```text
-- [x] Tarefa concluída
-```
+Ao salvar compra, coordenar custo, estoque e geração de contas a pagar. 007 inclui `situacao` e baixa.
 
-O responsável também deve atualizar o campo **Status** da sprint quando necessário.
+## Sprint 3 — Venda
 
-## Divisão das sprints
+- 010 Clientes — Integrante 2;
+- 011 Vendas e E-mail — Integrante 3;
+- 012 Contas a Receber e Relatório — Integrante 4.
 
-| Integrante | Sprints | Responsabilidade principal |
-|---|---|---|
-| Integrante 1 | Sprint 1 e Sprint 5 | Banco, Models, estoque e dashboard |
-| Integrante 2 | Sprint 2 e Sprint 6 | Layout, CRUDs, validações e testes |
-| Integrante 3 | Sprint 3 e Sprint 7 | Compras, documentação e apresentação |
-| Integrante 4 | Sprint 0 e Sprint 4 | Ambiente, repositório e vendas |
+011 inclui atualização de estoque, geração de contas a receber e e-mail. 012 inclui baixa e relatório por período da data da venda.
 
-## Arquivos
+## Sprint 4 — Convergência
 
-- [Integrante 1 — Sprints 01 e 05](INTEGRANTE-1-SPRINTS-01-05.md)
-- [Integrante 2 — Sprints 02 e 06](INTEGRANTE-2-SPRINTS-02-06.md)
-- [Integrante 3 — Sprints 03 e 07](INTEGRANTE-3-SPRINTS-03-07.md)
-- [Integrante 4 — Sprints 00 e 04](INTEGRANTE-4-SPRINTS-00-04.md)
+Revisão cruzada:
+- 1 revisa 2;
+- 2 revisa 3;
+- 3 revisa 4;
+- 4 revisa 1.
 
-## Ordem geral
-
-As sprints devem ser integradas nesta ordem:
-
-```text
-Sprint 0
-   ↓
-Sprint 1
-   ↓
-Sprint 2
-   ↓
-Sprint 3
-   ↓
-Sprint 4
-   ↓
-Sprint 5
-   ↓
-Sprint 6
-   ↓
-Sprint 7
-```
-
-A existência de responsáveis diferentes não significa que todas as sprints devam ser integradas ao mesmo tempo. Cada sprint depende do estado estável das anteriores.
-
-## Fluxo de Git recomendado
-
-Cada sprint deve ser desenvolvida em branch própria.
-
-Exemplos:
+## Branches reservadas
 
 ```text
-sprint/01-banco-models
-sprint/02-layout-cruds
-sprint/03-compras
-sprint/04-vendas
-sprint/05-estoque-dashboard
-sprint/06-testes-validacoes
-sprint/07-documentacao
+feature/001-categorias
+feature/002-produtos
+feature/003-fornecedores
+feature/004-formas-pagamento
+feature/005-compras
+feature/006-atualizacao-produto-compra
+feature/007-contas-pagar
+feature/008-entrada-estoque
+feature/009-autenticacao
+feature/010-clientes
+feature/011-vendas
+feature/012-contas-receber
 ```
 
-Ao iniciar uma sprint:
+Cada diretório de Spec usa `specs/XXX-nome`.
 
-```bash
-git checkout main
-git pull origin main
-git checkout -b sprint/XX-nome-da-sprint
-```
+## Regras
 
-Ao concluir:
+1. uma branch por Spec;
+2. não editar Spec de outro integrante;
+3. sincronizar `development` antes de implementar dependências;
+4. PR sempre feature → development;
+5. validar testes, quickstart e converge antes do PR;
+6. `.specify/feature.json` é local.
 
-```bash
-git add .
-git commit -m "feat: conclui sprint XX"
-git push -u origin sprint/XX-nome-da-sprint
-```
+## Datas
 
-Depois, abrir Pull Request para revisão antes do merge na branch estável.
-
-## Regra de conclusão
-
-Uma sprint só deve ser marcada como **Concluída** quando:
-
-- todas as tarefas obrigatórias estiverem marcadas;
-- os critérios de aceite forem atendidos;
-- os testes indicados tiverem sido executados;
-- o código estiver integrado sem quebrar a aplicação;
-- o responsável registrar observações importantes no próprio arquivo da sprint.
+O professor informou 07, 14 e 21 de dezembro. O documento não associa escopo específico a cada data.
