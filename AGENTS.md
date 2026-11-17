@@ -2,38 +2,33 @@
 
 ## Fontes e processo
 
-- Ler `.specify/memory/constitution.md`, `Docs/CONTEXTO.md` e
-  `Docs/Sprints/README.md` antes de planejar ou implementar features.
-- Os requisitos atualizados do professor têm prioridade. A seção recebida é `DE COMPRA`;
-  vendas está AGUARDANDO REQUISITOS ATUALIZADOS DO PROFESSOR.
-- Seguir Spec Kit com integração `codex`: specify → clarify → plan → checklist → tasks
-  → analyze → implement → converge. Spec, Plan e Tasks devem estar consistentes antes
-  da implementação; os artefatos detalhados ficarão em `specs/`.
-- Não existe DER definitivo. Não usar o modelo ou os checklists anteriores como fonte
-  oficial. Não presumir respostas às dez ambiguidades registradas no contexto.
-- Cada feature parte da `development` atualizada e gera PR para `development`;
-  `main` recebe somente versões estáveis/consolidadas. Seguir os números reservados e
-  informar explicitamente `SPECIFY_FEATURE_DIRECTORY` conforme o guia do integrante.
-- A Sprint 0 de adoção prepara somente processo e documentação: não criar Specs 001–008
-  nem código de negócio nessa tarefa. A divisão futura dos quatro integrantes está no roadmap.
+- Ler `.specify/memory/constitution.md`, `Docs/CONTEXTO.md`, `Docs/Sprints/README.md` e `Docs/GUIA-INTEGRANTES-SPECS.md`.
+- Os requisitos mais recentes do professor têm prioridade e agora incluem **DE COMPRA**, **DE VENDA** e requisitos transversais.
+- Seguir Spec Kit: specify → clarify → plan → checklist → tasks → analyze → implement → converge.
+- Cada feature parte de `development` e gera PR para `development`.
 
 ## Stack e convenções
 
-- Manter PHP 8.3+, Laravel 13, PostgreSQL, Blade, Bootstrap 5 e Vite.
-  JavaScript somente quando necessário. Seguir MVC, Eloquent, migrations, Form Requests
-  e Services quando houver regras relevantes, conforme a Constitution.
-- Laravel Boost não integra a stack e não é requisito do Spec Kit ou da integração Codex.
-  Não instalar Boost nem alterar dependências para preparar o fluxo de Specs.
-- Preservar a estrutura e as convenções existentes do Laravel; priorizar clareza,
-  organização e facilidade de explicação, sem funcionalidades especulativas.
-- Não atualizar dependências fora do escopo solicitado. Avisos preexistentes devem ser
-  documentados; não executar upgrades amplos para esta adoção.
+- PHP 8.3+, Laravel 13, **SQLite**, Blade, Bootstrap 5 e Vite.
+- Autenticação obrigatória com Laravel Breeze.
+- Seguir MVC, Eloquent, migrations, Form Requests e Services quando necessário.
+- Todos os formulários devem ser validados.
+- Listagens devem paginar 10 registros.
+- Pelo menos um cadastro deve possuir upload de arquivo; o roadmap aloca esse requisito à Spec 002.
+- Não instalar Laravel Boost.
+
+## Compra e venda
+
+- Alterar margem de categoria atualiza preço de venda dos produtos da categoria.
+- Compra atualiza valor de compra e estoque e gera contas a pagar conforme parcelamento.
+- Contas a pagar possuem situação e baixa.
+- Venda atualiza estoque e gera contas a receber conforme parcelamento.
+- Cada venda envia e-mail ao cliente com os dados da venda.
+- Contas a receber possuem baixa e relatório por período com totais de não pagos vencidos, não pagos a vencer e pagos.
 
 ## Verificação e Git
 
-- Consultar `git status` antes de editar e preservar alterações existentes do usuário.
-- Executar os testes existentes ao verificar mudanças e informar falhas ou limitações.
-  Não criar testes ou código de negócio nesta adoção.
-- Usar `specify integration status` para verificar a integração Codex.
-- Não versionar `.env`, credenciais ou estado local `.specify/feature.json`.
-- Não fazer commit, push ou merge sem instrução do usuário.
+- Consultar `git status` antes de editar.
+- Executar testes aplicáveis antes do PR.
+- Não versionar `.env`, credenciais ou `.specify/feature.json`.
+- Features entram em `development` por PR; `main` recebe somente versões consolidadas.
