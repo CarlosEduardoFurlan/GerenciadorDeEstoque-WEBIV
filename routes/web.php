@@ -6,15 +6,8 @@ use App\Http\Controllers\FornecedorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-// Fallback temporário até a integração da Spec 009 (Laravel Breeze).
-if (! file_exists(__DIR__.'/auth.php')) {
-    Route::get('/login', function () {
-        return response('Autenticação necessária.', 200);
-    })->name('login');
-}
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
@@ -38,3 +31,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/fornecedor/editar/{id}', [FornecedorController::class, 'editar']);
     Route::get('/fornecedor/excluir/{id}', [FornecedorController::class, 'excluir']);
 });
+
+require __DIR__.'/auth.php';

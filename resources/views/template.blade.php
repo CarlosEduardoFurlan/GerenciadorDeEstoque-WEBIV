@@ -21,6 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarPrincipal">
+                @auth
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('categorias.index') }}">Categorias</a>
@@ -34,6 +35,17 @@
                         </li>
                     @endif
                 </ul>
+                <span class="navbar-text me-3">{{ auth()->user()->name }}</span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-light btn-sm">Sair</button>
+                </form>
+                @else
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{{ route('login') }}">Entrar</a>
+                    <a class="nav-link" href="{{ route('register') }}">Criar conta</a>
+                </div>
+                @endauth
             </div>
         </div>
     </nav>
@@ -45,6 +57,10 @@
 
         @if (session('error'))
             <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
+        @endif
+
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">{{ session('status') }}</div>
         @endif
 
         <div class="bg-body-tertiary p-4 p-md-5 rounded">
